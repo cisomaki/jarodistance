@@ -14,6 +14,11 @@ sub jaro {
   my $length1 = length($string1);
   my $length2 = length($string2);
 
+  if ($length1 < 3 || $length2 < 3) {
+    print "Minimum string length for comparison is 4\n";
+    exit 1;
+  }
+
   my $range = (max($length1,$length2)/2)-1;
   my $min = ($length1 < $length2 ? $length1 : $length2);
 
