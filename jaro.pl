@@ -11,19 +11,11 @@ sub jaro {
   my $string1 = shift;
   my $string2 = shift;
 
-  # put shorter string first
-  if (length($string2) < length($string1)) {
-    my $swap;
-    $swap = $string1;
-    $string1 = $string2;
-    $string2 = $swap;
-  }
-
   my $length1 = length($string1);
   my $length2 = length($string2);
 
   my $range = (max($length1,$length2)/2)-1;
-  my $min = $length1; # while we can use $length1, this is for clarity
+  my $min = ($length1 < $length2 ? $length1 : $length2);
 
   my $matches = 0;
   my $transpositions = 0;
@@ -48,7 +40,7 @@ sub jaro {
       }
       if ($i >= 1) { # check back one character on $string2 if we are at the second position of $string1
         if (substr($string1,$i,1)   eq substr($string2,$i-1,1) &&
-            substr($string1,$i+1,1) eq substr($string2,$i,1)) {
+            substr($string1,$i-1,1) eq substr($string2,$i,1)) {
           $transpositions++;
         }
       }
