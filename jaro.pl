@@ -2,7 +2,6 @@
 
 use strict;
 use List::Util qw(max);
-use POSIX;
 
 my ($string1,$string2) = @ARGV;
 
